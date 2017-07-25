@@ -5,6 +5,7 @@ Applications need to trigger certain tasks at various points in time. Monthly, o
 Laravel provides a **scheduler**. `app/Console/Kernel.php`
 
 ```php
+// Kernel.php
 protected function schedule(Schedule $schedule)
 {
     // $schedule-> is an artisan command, "php artisan inspire".
@@ -31,3 +32,27 @@ Full API can be found in:
 and
 
 `https://laravel.com/docs/5.4/scheduling#introduction`
+
+## 2
+
+> Write code the way you would write it first, then create the methods you'll need.
+
+
+```php
+// Kernel.php
+protected function schedule(Schedule $schedule) // Fires an event array on the "$schedule" object.
+{
+    $schedule->command('inspire')
+             ->hourly(); // calling $schedule->command updates an events array.
+}
+
+// Schedule.php
+public function exec($command, array $parameters = [])
+{
+    //...
+
+    $this->events[] = $event = new Event($this->mutex, $command);
+
+    //...
+}
+```
