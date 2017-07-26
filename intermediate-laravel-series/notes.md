@@ -56,3 +56,58 @@ public function exec($command, array $parameters = [])
     //...
 }
 ```
+
+## 3
+
+**Events** An important "thing" that just took place within the application.
+
+**Listener** Handles the _event_.
+
+**Eventing** `.../app/Providers/EventServiceProvider.php` _events_ and _listeners_ are mapped here.
+
+events can be created, with their respective files, from the command line `php artisan event:generate`.  This creates the _Event_ and _Listener_ for us.
+
+```php
+//EventServiceProvider.php
+protected $listen = [
+    'App\Events\Event' => [
+        'App\Listeners\EventListener',
+        'App\Listeners\AnotherListener' // single responsibility principle.
+    ],
+];
+```
+
+To fire an event:
+
+1. reference your event function (helper function).
+2. new up the event object you created
+3. pass something that you require.
+
+```php
+  Event::fire('NameOfTheEvent', []);
+```
+
+or using a helper function:
+
+```php
+  $someAction = new App\SomeAction;
+
+  event(new NameOfTheEvent($someAction));
+```
+
+The class related to the listener gets instantiated or _resolved_ and a method (`handle()`) in that class is triggered.
+
+```php
+  //EventServiceProvider.php
+  protected $listen = [
+      'App\Events\Event' => [
+          'App\Listeners\EventListener',
+      ],
+  ];
+
+  //SomeEventListener.php
+  public function handle(SomeAction $event)
+  {
+    //...
+  }
+```
