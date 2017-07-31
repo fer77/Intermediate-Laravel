@@ -111,3 +111,45 @@ The class related to the listener gets instantiated or _resolved_ and a method (
     //...
   }
 ```
+
+## 4
+
+Basic process of listening and firing an event:
+
+- Listen for an event.
+- Update an array of the object with all the listeners.
+- When the event is fired all the listeners are fetched and for each one a callback is triggered and a response is returned.
+
+`.../vendor/laravel/framework/src/Illuminate/Events/EventServiceProvider.php`
+The EventServiceProvider.php `register` function bootstraps the component into the Laravel application.
+
+```php
+// $app, is the Laravel container.
+
+public function register()
+{
+    $this->app->singleton('events', function ($app) { // sends this to Dispatcher.php
+        return (new Dispatcher($app))->setQueueResolver(function () use ($app) {
+            return $app->make(QueueFactoryContract::class);
+        });
+    });
+}
+```
+
+`.../vendor/laravel/framework/src/Illuminate/Events/Dispatcher.php`
+Dispatcher.php updates the listen array.
+
+```php
+public function listen($events, $listener)
+{
+    foreach ((array) $events as $event) {
+        if (Str::contains($event, '*')) {
+            //...
+        } else {
+            $this->listeners[$event][] = $this->makeListener($listener);
+        }
+    }
+}
+```
+
+Then the event is fired.
