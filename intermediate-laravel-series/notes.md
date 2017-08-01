@@ -153,3 +153,75 @@ public function listen($events, $listener)
 ```
 
 Then the event is fired.
+
+## 5
+
+Interfaces/[Contracts] (https://github.com/illuminate/contracts).
+
+Using interfaces to decouple the project makes making changes easy to handle and to make.
+
+```php
+Route::get('/', function () {
+  // dd(app('Illuminate\Config\Repository')['database']['default']);
+  // dd(app('Illuminate\Contracts\Config\Repository')['database']['default']);
+  // dd(app('config')['database']['default']);
+  // dd(app()['config']['database']['default']);
+  // dd(Config::get('database.default'));
+});
+```
+
+_constructor injection_
+```php
+//...
+class WelcomeController extends Controller
+{
+  protected $config;
+  public function __construct(Repository $config)
+  {
+    $this->config = $config;
+  }
+    public function test()
+    {
+      // constructor injection
+      return $this->config->get('database.default');
+    }
+}
+```
+
+_method injection_
+```php
+//...
+public function test(Repository $config)
+{
+  // method injection
+  return $config->get('database.default');
+}
+```
+
+_facade_
+```php
+//...
+use Config;
+
+class WelcomeController extends Controller
+{
+    public function test()
+    {
+      // facade
+      return Config::get('database.default');
+    }
+}
+```
+
+_config helper function_
+```php
+//...
+class WelcomeController extends Controller
+{
+    public function test()
+    {
+      // config helper function
+      return config('database.default');
+    }
+}
+```
