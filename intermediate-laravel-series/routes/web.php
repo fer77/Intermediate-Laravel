@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  // dd(app('Illuminate\Config\Repository')['database']['default']);
+  // dd(app('Illuminate\Contracts\Config\Repository')['database']['default']);
+  // dd(app('config')['database']['default']);
+  // dd(app()['config']['database']['default']);
+  // dd(Config::get('database.default'));
+  // dd(app('Illuminate\Contracts\Config\Repository'));
 });
+
+Route::get('test', 'WelcomeController@test');
