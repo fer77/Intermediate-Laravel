@@ -225,3 +225,10 @@ class WelcomeController extends Controller
     }
 }
 ```
+
+## 6
+
+Review this section again a couple of times.
+---
+
+To find out how anything works in Laravel, go to the <class>ServiceProvider.php where the method is registered and bootstrapped into the Laravel application.
