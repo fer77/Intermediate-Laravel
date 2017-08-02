@@ -20,4 +20,13 @@ Route::get('/', function () {
   // dd(app('Illuminate\Contracts\Config\Repository'));
 });
 
-Route::get('test', 'WelcomeController@test');
+// Route::get('test', 'WelcomeController@test');
+
+Route::get('/', function() {
+  // dd(Hash::make('password'));
+  // dd(bcrypt('password'));
+  // dd(app('hash')->make('password'));
+  // dd(app()['hash']->make('password'));
+  // dd(app('Illuminate\Hashing\BcryptHasher')->make('password'));
+  dd(app('Illuminate\Contracts\Hashing\Hasher')->make('password'));
+});
