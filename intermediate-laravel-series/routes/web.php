@@ -28,5 +28,5 @@ Route::get('/', function() {
   // dd(app('hash')->make('password'));
   // dd(app()['hash']->make('password'));
   // dd(app('Illuminate\Hashing\BcryptHasher')->make('password'));
-  dd(app('Illuminate\Contracts\Hashing\Hasher')->make('password'));
+  // dd(app('Illuminate\Contracts\Hashing\Hasher')->make('password'));
 });
