@@ -232,3 +232,36 @@ Review this section again a couple of times.
 ---
 
 To find out how anything works in Laravel, go to the <class>ServiceProvider.php where the method is registered and bootstrapped into the Laravel application.
+
+## 7
+
+Middleware manages and filters incoming requests and protect our routes however needed.
+
+`.../app/Http/Kernel.php`
+```php
+protected $middleware = [
+    \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+    \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+    \App\Http\Middleware\TrimStrings::class,
+    \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+];
+```
+This is for middleware that will be executed for every single request.
+
+`.../app/Http/Kernel.php`
+```php
+protected $routeMiddleware = [
+    'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+    'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+    'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    'can' => \Illuminate\Auth\Middleware\Authorize::class,
+    'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+    'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+];
+```
+This is for middleware that you "opt" into, won't fire on each request, but only when opted in.
+
+ Command to make middleware from the command line:
+
+- `php artisan make:middleware <name for the middleware>`
+- Then register it in `.../app/Http/Kernel.php` under `$routeMiddleware`.
