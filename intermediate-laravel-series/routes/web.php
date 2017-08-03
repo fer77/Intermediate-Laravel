@@ -30,3 +30,24 @@ Route::get('/', function() {
   // dd(app('Illuminate\Hashing\BcryptHasher')->make('password'));
   // dd(app('Illuminate\Contracts\Hashing\Hasher')->make('password'));
 });
+
+Route::get('/', function() {
+  return view('welcome');
+});
+
+// Test out this middleware:
+Route::get('login', function() {
+  $user = App\User::forceCreate([
+    'name' => 'BobBelcher',
+    'email' => 'bob@example.com',
+    'password' => bcrypt('password')
+  ]);
+
+  Auth::login($user);
+
+  return redirect('/');
+});
+
+Route::get('test', ['middleware' => 'subscribed', function() {
+  return 'Subscription only page';
+}]);
