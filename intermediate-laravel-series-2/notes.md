@@ -267,3 +267,18 @@ This is for middleware that you "opt" into, won't fire on each request, but only
 - Then register it in `.../app/Http/Kernel.php` under `$routeMiddleware`.
 
 ## 8
+
+When using sqlite for a database in these lessons.
+
+1. add sqlite as default in `.../config/database.php`
+
+2. `touch storage/database.sqlite` for newer version of laravel I think this file's path maybe `database/database.sqlite`
+
+When referencing a middleware we can give it the name of the middleware, but if we need to pass parameters we can pass them like this:
+
+```php
+Route::get('test', ['middleware' => 'subscribed:yearly', function() {
+  return 'You can only view this page if you are logged in and subscribed to the yearly plan';
+}]);
+
+```
