@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    protected $toTruncate = ['users', 'lessons'];
     /**
      * Run the database seeds.
      *
@@ -11,6 +12,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        foreach ($this->toTruncate as $table) {
+            DB::table($table)->truncate(); // Empties the DB's old faker records for the newly created ones.
+        }
+
+        $this->call('UsersTableSeeder');
+        $this->call('LessonsTableSeeder');
     }
 }
