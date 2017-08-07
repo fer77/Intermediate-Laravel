@@ -282,3 +282,17 @@ Route::get('test', ['middleware' => 'subscribed:yearly', function() {
 }]);
 
 ```
+
+## 9
+
+creating sample records in your project's database.
+
+**Database seeding** `.../database/seeds/DatabaseSeeder.php` parent class responsible for triggering all seeders.
+
+_Factory definition class_ `.../database/factories/UserFactory.php` tells laravel what the seeder needs to create for each record.
+
+_Faker_ is a simple api that generates any amount of data.
+
+1. Create a `...TableSeeder` and specify what and how many records to create.
+
+2. Define the definition of ehat to create in `database/factory/...php`
