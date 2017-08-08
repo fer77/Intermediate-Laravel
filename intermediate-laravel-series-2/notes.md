@@ -296,3 +296,9 @@ _Faker_ is a simple api that generates any amount of data.
 1. Create a `...TableSeeder` and specify what and how many records to create.
 
 2. Define the definition of ehat to create in `database/factory/...php`
+
+## 10
+
+`php artisan db:seed` Calls the master db seeder by default, also checkout `php artisan help db:seed` for more info.
+
+`.../vendor/laravel/framework/src/Illuminate/Database/Console/Seeds/SeedCommand.php`
