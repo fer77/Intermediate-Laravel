@@ -302,3 +302,23 @@ _Faker_ is a simple api that generates any amount of data.
 `php artisan db:seed` Calls the master db seeder by default, also checkout `php artisan help db:seed` for more info.
 
 `.../vendor/laravel/framework/src/Illuminate/Database/Console/Seeds/SeedCommand.php`
+
+## 10
+
+A job is an instruction, usually queued, that you want to give your application. Instead of placing all your instructions(logic) in a controller, give it a readable name, assign it dependencies, and add it to the que.
+
+```php
+    public function __construct()
+    {
+        // Any arguments that need to be passed through.
+    }
+```
+
+```php
+    public function handle()
+    {
+        // Automatic resolution.  Dependencies can be typened here.
+    }
+```
+
+Events can be fired from here and dispatch jobs.
