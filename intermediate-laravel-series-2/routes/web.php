@@ -11,27 +11,29 @@
 |
 */
 
-use App\User;
+Route::get('reports', 'ReportsController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// use App\User;
 
-Route::get('login', function() {
-  User::truncate();
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('login', function() {
+//   User::truncate();
   
-  $user = User::create([
-    'name'=>'BobBelcher',
-    'email'=>"bob@example.com",
-    'password'=>bcrypt('password'),
-    'plan'=>'yearly'
-  ]);
+//   $user = User::create([
+//     'name'=>'BobBelcher',
+//     'email'=>"bob@example.com",
+//     'password'=>bcrypt('password'),
+//     'plan'=>'yearly'
+//   ]);
 
-  Auth::login($user);
+//   Auth::login($user);
 
-  return redirect('/');
-});
+//   return redirect('/');
+// });
 
-Route::get('test', ['middleware' => 'subscribed:yearly', function() {
-  return 'You can only view this page if you are logged in and subscribed to the yearly plan';
-}]);
+// Route::get('test', ['middleware' => 'subscribed:yearly', function() {
+//   return 'You can only view this page if you are logged in and subscribed to the yearly plan';
+// }]);
