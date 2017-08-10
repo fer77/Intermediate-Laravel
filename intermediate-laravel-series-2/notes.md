@@ -322,3 +322,16 @@ A job is an instruction, usually queued, that you want to give your application.
 ```
 
 Events can be fired from here and dispatch jobs.
+
+## 11
+
+Creating custom Blade directives for views.
+
+Directives can be registered in `app/Providers/AppServiceProvider.php` within the boot method:
+
+```php
+    public function boot()
+    {
+        //
+    }
+```
