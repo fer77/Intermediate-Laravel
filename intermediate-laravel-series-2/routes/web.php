@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('reports', 'ReportsController@index');
+// Route::get('reports', 'ReportsController@index');
 
 // use App\User;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // Route::get('login', function() {
 //   User::truncate();
